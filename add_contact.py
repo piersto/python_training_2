@@ -12,7 +12,7 @@ class UntitledTestCase(unittest.TestCase):
     def test_add_empty_contact(self):
         wd = self.wd
         self.open_login_page(wd)
-        self.login(wd)
+        self.login(wd, user_name="admin", password="secret")
         self.add_new_contact(wd)
         self.logout(wd)
 
@@ -35,13 +35,13 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         wd.find_element_by_link_text("home page").click()
 
-    def login(self, wd):
+    def login(self, wd, user_name, password):
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(user_name)
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def open_login_page(self, wd):
