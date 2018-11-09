@@ -14,6 +14,11 @@ class UntitledTestCase(unittest.TestCase):
         self.open_login_page(wd)
         self.login(wd)
         self.add_new_contact(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
+
 
     def add_new_contact(self, wd):
         wd.find_element_by_link_text("add new").click()
