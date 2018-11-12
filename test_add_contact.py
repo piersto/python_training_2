@@ -20,6 +20,18 @@ class AddContact(unittest.TestCase):
         self.go_back_to_home_page(wd)
         self.logout(wd)
 
+    def test_add_empty_contact(self):
+        wd = self.wd
+        self.open_login_page(wd)
+        self.log_in(wd)
+        self.open_add_group_page(wd)
+        self.fill_group_form(wd, first_name="", middlename="", lastname="", nickname="", title="", company_name="", address="", home_phone="", mobile_phone="",
+                             work_phone="", fax="", email="", second_email="", third_email="", homepage="", birthdate="-", birthmonth="-", birth_year="",
+                             anniversary_day="-", anniversary_month="-", anniversary_year="", second_address="", second_home="", notes="")
+        self.submit_group_form(wd)
+        self.go_back_to_home_page(wd)
+        self.logout(wd)
+
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
