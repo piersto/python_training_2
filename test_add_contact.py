@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
-
+import unittest
 
 class AddContact(unittest.TestCase):
     def setUp(self):
@@ -13,13 +10,29 @@ class AddContact(unittest.TestCase):
 
     def test_add_contact(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_id("LoginForm").submit()
-        wd.find_element_by_link_text("add new").click()
+        self.open_login_page(wd)
+        self.log_in(wd)
+        self.open_add_group_page(wd)
+        self.fill_group_form(wd)
+        self.submit_group_form(wd)
+        self.go_back_to_home_page(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        # logout
+        wd.find_element_by_link_text("Logout").click()
+
+    def go_back_to_home_page(self, wd):
+        # go back to home page
+        wd.find_element_by_link_text("home page").click()
+
+    def submit_group_form(self, wd):
+        # submit the form
+        wd.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
+
+    def fill_group_form(self, wd):
+        # fill all fields
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Pierre")
@@ -76,36 +89,22 @@ class AddContact(unittest.TestCase):
         wd.find_element_by_name("phone2").send_keys("home second")
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys("notes")
-        wd.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
-        wd.find_element_by_link_text("home page").click()
-        wd.find_element_by_link_text("Logout").click()
 
-    def is_element_present(self, how, what):
-        try:
-            self.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e:
-            return False
-        return True
+    def open_add_group_page(self, wd):
+        # open add group page
+        wd.find_element_by_link_text("add new").click()
 
-    def is_alert_present(self):
-        try:
-            self.wd.switch_to_alert()
-        except NoAlertPresentException as e:
-            return False
-        return True
+    def log_in(self, wd):
+        # login
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_id("LoginForm").submit()
 
-    def close_alert_and_get_its_text(self):
-        try:
-            alert = self.wd.switch_to_alert()
-            alert_text = alert.text
-            if self.accept_next_alert:
-                alert.accept()
-            else:
-                alert.dismiss()
-            return alert_text
-        finally:
-            self.accept_next_alert = True
+    def open_login_page(self, wd):
+        # open home page
+        wd.get("http://localhost/addressbook/")
 
     def tearDown(self):
         self.wd.quit()
