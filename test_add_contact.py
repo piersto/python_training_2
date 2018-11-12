@@ -13,9 +13,9 @@ class AddContact(unittest.TestCase):
         self.open_login_page(wd)
         self.log_in(wd)
         self.open_add_group_page(wd)
-        self.fill_group_form(wd, "Pierre", "sto", "stop", "nik", "title", "Company", "3096- rue goyer", "514", "515",
-                             "516", "517", "1@sto.com", "2@sto.com", "3@sto.com", "sto.com", "18", "January", "1971",
-                             "18", "February", "2018", "address second", "home second", "notes")
+        self.fill_group_form(wd, first_name="Pierre", middlename="sto", lastname="stop", nickname="nik", title="title", company_name="Company", address="3096- rue goyer", home_phone="514", mobile_phone="515",
+                             work_phone="516", fax="517", email="1@sto.com", second_email="2@sto.com", third_email="3@sto.com", homepage="sto.com", birthdate="18", birthmonth="January", birth_year="1971",
+                             anniversary_day="18", anniversary_month="February", anniversary_year="2018", second_address="address second", second_home="home second", notes="notes")
         self.submit_group_form(wd)
         self.go_back_to_home_page(wd)
         self.logout(wd)
