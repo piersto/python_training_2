@@ -49,10 +49,6 @@ class Application:
         wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
-
     def go_back_to_home_page(self):
         wd = self.wd
         wd.find_element_by_link_text("home page").click()
@@ -137,9 +133,6 @@ class Application:
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_id("LoginForm").submit()
 
-    def open_login_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/")
 
     def destroy(self):
         self.wd.quit()
