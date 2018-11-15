@@ -133,6 +133,5 @@ class Application:
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_id("LoginForm").submit()
 
-
     def destroy(self):
         self.wd.quit()
