@@ -1,15 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+from fixture.session import SessionHelper
 
 class Application:
+
     def __init__(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
-
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
-        wd.find_element_by_name("user")
+        self.session = SessionHelper(self)
 
     def return_to_groups_page(self):
         wd = self.wd
@@ -124,15 +122,6 @@ class Application:
     def open_add_contact_page(self):
         wd = self.wd
         wd.find_element_by_link_text("add new").click()
-
-    def log_in(self):
-        wd = self.wd
-        self.open_login_page()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_id("LoginForm").submit()
 
     def destroy(self):
         self.wd.quit()
