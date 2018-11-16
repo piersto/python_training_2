@@ -23,5 +23,9 @@ class Application:
         wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
+    def open_home_page(self):
+        wd = self.wd
+        wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Address Book'])[1]/following::a[2]").click()
+
     def destroy(self):
         self.wd.quit()

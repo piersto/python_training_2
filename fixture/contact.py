@@ -78,3 +78,10 @@ class ContactHelper:
     def open_add_contact_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
+    def delete_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        self.accept_next_alert = True
+        wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]").click()
+        wd.switch_to_alert().accept()
