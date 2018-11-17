@@ -75,6 +75,8 @@ class ContactHelper:
         self.submit_contact_form()
         self.app.go_back_to_home_page()
 
+    def modify_first_contact(self, new_contact_data):
+
     def open_add_contact_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
