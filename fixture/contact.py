@@ -16,6 +16,12 @@ class ContactHelper:
     def create(self, contact):
         wd = self.app.wd
         self.open_add_contact_page()
+        self.fill_contact_form(contact)
+        self.submit_contact_form()
+        self.app.go_back_to_home_page()
+
+    def fill_contact_form(self, contact):
+        wd = self.app.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.first_name)
@@ -72,8 +78,6 @@ class ContactHelper:
         wd.find_element_by_name("phone2").send_keys(contact.second_home)
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
-        self.submit_contact_form()
-        self.app.go_back_to_home_page()
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
