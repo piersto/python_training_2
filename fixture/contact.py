@@ -13,7 +13,7 @@ class ContactHelper:
         wd.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
 
-    def fill_contact_form(self, contact):
+    def create(self, contact):
         wd = self.app.wd
         self.open_add_contact_page()
         wd.find_element_by_name("firstname").click()
