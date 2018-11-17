@@ -20,9 +20,16 @@ class ContactHelper:
         self.submit_contact_form()
         self.app.go_back_to_home_page()
 
+    def type(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
+
     def fill_contact_form(self, contact):
         wd = self.app.wd
-        self.type(contact)
+        self.type("firstname", contact.first_name)
 
         wd.find_element_by_name("middlename").clear()
         wd.find_element_by_name("middlename").send_keys(contact.middlename)
@@ -78,12 +85,7 @@ class ContactHelper:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
 
-    def type(self, contact):
-        wd = self.app.wd
-        if contact.first_name is None:
-            wd.find_element_by_name("firstname").click()
-            wd.find_element_by_name("firstname").clear()
-            wd.find_element_by_name("firstname").send_keys(contact.first_name)
+
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
