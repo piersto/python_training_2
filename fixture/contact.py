@@ -76,6 +76,17 @@ class ContactHelper:
         self.app.go_back_to_home_page()
 
     def modify_first_contact(self, new_contact_data):
+        wd = self.app.wd
+        # open modification form
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        # fill contact form
+        pass
+        # submit modification
+        wd.find_element_by_name("update").click()
+        self.app.go_back_to_home_page()
+
+
+
 
     def open_add_contact_page(self):
         wd = self.app.wd
