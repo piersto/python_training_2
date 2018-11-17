@@ -84,13 +84,10 @@ class ContactHelper:
         # open modification form
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         # fill contact form
-        pass
+        self.fill_contact_form(new_contact_data)
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
-
-
-
 
     def open_add_contact_page(self):
         wd = self.app.wd
