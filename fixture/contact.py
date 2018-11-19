@@ -77,7 +77,8 @@ class ContactHelper:
 
     def open_add_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
+        if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Edit / add address book entry'])[1]/following::input[1]")) > 0):
+            wd.find_element_by_link_text("add new").click()
 
     def delete_contact(self):
         wd = self.app.wd

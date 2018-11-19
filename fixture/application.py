@@ -31,7 +31,8 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Address Book'])[1]/following::a[2]").click()
+        if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("add")) > 0):
+            wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Address Book'])[1]/following::a[2]").click()
 
     def destroy(self):
         self.wd.quit()
