@@ -42,7 +42,7 @@ class GroupHelper:
         wd = self.app.wd
         self.open_groups_page()
         self.select_first_group()
-        # submit delition
+        # submit deletion
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
