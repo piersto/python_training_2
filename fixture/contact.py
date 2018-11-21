@@ -18,25 +18,25 @@ class ContactHelper:
         wd = self.app.wd
         self.open_add_contact_page()
         self.fill_contact_form(contact)
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.birthdate)
-        wd.find_element_by_name("bday").click()
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.birthmonth)
-        wd.find_element_by_name("bmonth").click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.birth_year)
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.anniversary_day)
-        wd.find_element_by_name("aday").click()
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.anniversary_month)
-        wd.find_element_by_name("amonth").click()
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys(contact.anniversary_year)
+        self.fill_contact_drop_downs(contact)
         self.submit_contact_form()
         self.app.go_back_to_home_page()
+
+    def fill_contact_drop_downs(self, contact):
+        wd = self.app.wd
+        self.select_from_drop_down("bday", contact.birthdate)
+        self.select_from_drop_down("bmonth", contact.birthmonth)
+        self.select_from_drop_down("byear", contact.birth_year)
+        self.select_from_drop_down("aday", contact.anniversary_day)
+        self.select_from_drop_down("amonth", contact.anniversary_month)
+        self.select_from_drop_down("ayear", contact.anniversary_year)
+
+    def select_from_drop_down(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            Select(wd.find_element_by_name(field_name)).select_by_visible_text()
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).click(text)
 
     def type(self, field_name, text):
         wd = self.app.wd
@@ -70,8 +70,8 @@ class ContactHelper:
         wd = self.app.wd
         # open modification form
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        # fill contact form
         self.fill_contact_form(new_contact_data)
+        self.fill_contact_drop_downs(new_contact_data)
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
