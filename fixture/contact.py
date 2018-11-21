@@ -26,17 +26,13 @@ class ContactHelper:
         wd = self.app.wd
         self.select_from_drop_down("bday", contact.birthdate)
         self.select_from_drop_down("bmonth", contact.birthmonth)
-        self.select_from_drop_down("byear", contact.birth_year)
         self.select_from_drop_down("aday", contact.anniversary_day)
         self.select_from_drop_down("amonth", contact.anniversary_month)
-        self.select_from_drop_down("ayear", contact.anniversary_year)
 
     def select_from_drop_down(self, field_name, text):
         wd = self.app.wd
         if text is not None:
-            Select(wd.find_element_by_name(field_name)).select_by_visible_text()
-            wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).click(text)
+            Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
 
     def type(self, field_name, text):
         wd = self.app.wd
@@ -65,6 +61,8 @@ class ContactHelper:
         self.type("address2", contact.second_address)
         self.type("phone2", contact.second_home)
         self.type("notes", contact.notes)
+        self.type("byear", contact.birth_year)
+        self.type("ayear", contact.anniversary_year)
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
