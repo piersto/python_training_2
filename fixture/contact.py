@@ -21,6 +21,7 @@ class ContactHelper:
         self.fill_contact_drop_downs(contact)
         self.submit_contact_form()
         self.app.go_back_to_home_page()
+        self.contact_cache = None
 
     def fill_contact_drop_downs(self, contact):
         wd = self.app.wd
@@ -73,6 +74,8 @@ class ContactHelper:
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
+        self.contact_cache = None
+
 
     def open_add_contact_page(self):
         wd = self.app.wd
@@ -85,19 +88,26 @@ class ContactHelper:
         self.accept_next_alert = True
         wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
+
 
     def count(self):
         wd = self.app.wd
         self.app.open_home_page()
         return len(wd.find_elements_by_xpath("//img[@alt='Edit']"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            cells = element.find_elements_by_tag_name("td")
-            lastname = cells[1].text
-            first_name = cells[2].text
-            id = cells[0].find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(lastname=lastname, first_name=first_name, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                cells = element.find_elements_by_tag_name("td")
+                lastname = cells[1].text
+                first_name = cells[2].text
+                id = cells[0].find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id))
+        return list(self.contact_cache)
+
+
