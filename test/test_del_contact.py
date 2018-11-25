@@ -4,9 +4,9 @@ from model.contact import Contact
 
 def test_del_contact(app):
     app.open_home_page()
-    old_contacts = app.contact.get_contact_list()
     if app.contact.count() == 0:
         app.contact.create(Contact(first_name="Vasia"))
+    old_contacts = app.contact.get_contact_list()
     app.contact.delete_contact()
     app.open_home_page()
     new_contacts = app.contact.get_contact_list()
