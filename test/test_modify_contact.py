@@ -12,8 +12,6 @@ def test_modify_contact_first_name(app):
     assert len(old_contacts) == app.contact.count()
 
 
-
-
 #def test_modify_contact_middlename(app):
 #    app.open_home_page()
 #    if app.contact.count() == 0:

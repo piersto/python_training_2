@@ -82,9 +82,14 @@ class ContactHelper:
         if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Edit / add address book entry'])[1]/following::input[1]")) > 0):
             wd.find_element_by_link_text("add new").click()
 
-    def delete_contact(self):
+    def delete_first_contact(self, index):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        self.delete_contact_by_index(0)
+
+
+    def delete_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
         self.accept_next_alert = True
         wd.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]").click()
         wd.switch_to_alert().accept()
