@@ -65,16 +65,20 @@ class ContactHelper:
         self.type("byear", contact.birth_year)
         self.type("ayear", contact.anniversary_year)
 
-    def modify_first_contact(self, new_contact_data):
+    def modify_contact_by_index(self, new_contact_data, index):
         wd = self.app.wd
         # open modification form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(new_contact_data)
         self.fill_contact_drop_downs(new_contact_data)
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
         self.contact_cache = None
+
+    def modify_first_contact(self,index):
+        wd = self.app.wd
+        self.modify_contact_by_index(0)
 
 
     def open_add_contact_page(self):
