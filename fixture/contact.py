@@ -90,7 +90,6 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-
     def count(self):
         wd = self.app.wd
         self.app.open_home_page()
