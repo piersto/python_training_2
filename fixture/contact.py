@@ -71,13 +71,6 @@ class ContactHelper:
         self.app.go_back_to_home_page()
         self.contact_cache = None
 
-    def open_contact_view_by_index(self, index):
-        wd = self.app.wd
-        row = wd.find_elements_by_name("entry")[index]
-        cell = row.find_elements_by_tag_name("td")[6]
-        cell.find_element_by_tag_name("a").click()
-
-
     def modify_first_contact(self,index):
         wd = self.app.wd
         self.modify_contact_by_index(0)
@@ -119,5 +112,78 @@ class ContactHelper:
                 id = cells[0].find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id))
         return list(self.contact_cache)
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[6]
+        cell.find_element_by_tag_name("a").click()
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.modify_contact_by_index(index)
+        first_name = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        middlename = wd.find_element_by_name("middlename").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        home_phone = wd.find_element_by_name("home").get_attribute("value")
+        mobile_phone = wd.find_element_by_name("mobile").get_attribute("value")
+        work_phone = wd.find_element_by_name("work").get_attribute("value")
+        second_home = wd.find_element_by_name("phone2").get_attribute("value")
+        return Contact(first_name=first_name, lastname=lastname, middlename=middlename,id=id, home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
