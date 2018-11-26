@@ -4,6 +4,6 @@ def test_phone_on_home_page(app):
     assert contact_from_home_page.home_phone == contact_from_edit_page.home_phone
     assert contact_from_home_page.mobile_phone == contact_from_edit_page.mobile_phone
     assert contact_from_home_page.work_phone == contact_from_edit_page.work_phone
-    assert contact_from_home_page.fax == contact_from_edit_page.fax
+    assert contact_from_home_page.second_home == contact_from_edit_page.second_home
 
 

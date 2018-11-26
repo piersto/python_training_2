@@ -110,7 +110,8 @@ class ContactHelper:
                 lastname = cells[1].text
                 first_name = cells[2].text
                 id = cells[0].find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id))
+                all_phones = cells[5].text.splitlines()
+                self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id, home_phone=all_phones[0], mobile_phone=all_phones[1], work_phone=all_phones[2], second_home=all_phones[3]))
         return list(self.contact_cache)
 
     def open_contact_view_by_index(self, index):
@@ -131,7 +132,7 @@ class ContactHelper:
         mobile_phone = wd.find_element_by_name("mobile").get_attribute("value")
         work_phone = wd.find_element_by_name("work").get_attribute("value")
         second_home = wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(first_name=first_name, lastname=lastname, middlename=middlename,id=id, home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
+        return Contact(first_name=first_name, lastname=lastname, middlename=middlename, id=id, home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
 
 
 

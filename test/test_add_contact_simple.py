@@ -11,4 +11,5 @@ def test_add_contact(app):
 
 
 def test_open_contact_view_by_index(app):
-    app.contact.open_contact_view_by_index()
+    app.contact.open_contact_view_by_index(0)
+
