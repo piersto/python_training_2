@@ -18,17 +18,9 @@ class ContactHelper:
         wd = self.app.wd
         self.open_add_contact_page()
         self.fill_contact_form(contact)
-        self.fill_contact_drop_downs(contact)
         self.submit_contact_form()
         self.app.go_back_to_home_page()
         self.contact_cache = None
-
-    def fill_contact_drop_downs(self, contact):
-        wd = self.app.wd
-        self.select_from_drop_down("bday", contact.birthdate)
-        self.select_from_drop_down("bmonth", contact.birthmonth)
-        self.select_from_drop_down("aday", contact.anniversary_day)
-        self.select_from_drop_down("amonth", contact.anniversary_month)
 
     def select_from_drop_down(self, field_name, text):
         wd = self.app.wd
@@ -44,6 +36,10 @@ class ContactHelper:
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
+        self.select_from_drop_down("bday", contact.birthdate)
+        self.select_from_drop_down("bmonth", contact.birthmonth)
+        self.select_from_drop_down("aday", contact.anniversary_day)
+        self.select_from_drop_down("amonth", contact.anniversary_month)
         self.type("firstname", contact.first_name)
         self.type("middlename", contact.middlename)
         self.type("lastname", contact.lastname)
@@ -70,7 +66,6 @@ class ContactHelper:
         # open modification form
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(new_contact_data)
-        self.fill_contact_drop_downs(new_contact_data)
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
