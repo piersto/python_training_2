@@ -2,7 +2,7 @@
 
 from selenium.webdriver.support.ui import Select
 from model.contact import Contact
-
+import re
 
 class ContactHelper:
 
@@ -133,6 +133,19 @@ class ContactHelper:
         work_phone = wd.find_element_by_name("work").get_attribute("value")
         second_home = wd.find_element_by_name("phone2").get_attribute("value")
         return Contact(first_name=first_name, lastname=lastname, middlename=middlename, id=id, home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
+
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_contact_view_by_index(index)
+        text = wd.find_element_by_id("content").text
+        home_phone = re.search("H: (.*)", text).group(1)
+        mobile_phone = re.search("M: (.*)", text).group(1)
+        work_phone = re.search("W: (.*)", text).group(1)
+        second_home = re.search("F: (.*)", text).group(1)
+        return Contact(home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
+
+
 
 
 
