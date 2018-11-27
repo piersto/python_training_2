@@ -71,7 +71,7 @@ class ContactHelper:
         self.app.go_back_to_home_page()
         self.contact_cache = None
 
-    def modify_first_contact(self,index):
+    def modify_first_contact(self):
         wd = self.app.wd
         self.modify_contact_by_index(0)
 
@@ -81,7 +81,7 @@ class ContactHelper:
         if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Edit / add address book entry'])[1]/following::input[1]")) > 0):
             wd.find_element_by_link_text("add new").click()
 
-    def delete_first_contact(self, index):
+    def delete_first_contact(self):
         wd = self.app.wd
         self.delete_contact_by_index(0)
 
