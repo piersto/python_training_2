@@ -64,12 +64,16 @@ class ContactHelper:
     def modify_contact_by_index(self, new_contact_data, index):
         wd = self.app.wd
         # open modification form
-        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+        self.open_edit_form(index)
         self.fill_contact_form(new_contact_data)
         # submit modification
         wd.find_element_by_name("update").click()
         self.app.go_back_to_home_page()
         self.contact_cache = None
+
+    def open_edit_form(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def modify_first_contact(self):
         wd = self.app.wd
@@ -123,7 +127,7 @@ class ContactHelper:
 
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
-        self.modify_contact_by_index(index)
+        self.open_edit_form(index)
         first_name = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         middlename = wd.find_element_by_name("middlename").get_attribute("value")
