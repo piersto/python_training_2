@@ -116,9 +116,11 @@ class ContactHelper:
                 id = cells[0].find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text
                 all_mails = cells[4].text
+                address = cells[3].text
                 self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id,
                                                                 all_phones_from_home_page=all_phones,
-                                                                    all_mails_from_home_page=all_mails))
+                                                                    all_mails_from_home_page=all_mails,
+                                                  address=address))
         return list(self.contact_cache)
 
     def open_contact_view_by_index(self, index):
@@ -142,9 +144,10 @@ class ContactHelper:
         email = wd.find_element_by_name("email").get_attribute("value")
         second_email = wd.find_element_by_name("email2").get_attribute("value")
         third_email = wd.find_element_by_name("email3").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
         return Contact(first_name=first_name, lastname=lastname, middlename=middlename, id=id,
                        home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home,
-                       email=email, second_email=second_email, third_email=third_email)
+                       email=email, second_email=second_email, third_email=third_email, address=address)
 
 
     def get_contact_from_view_page(self, index):
