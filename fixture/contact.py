@@ -137,7 +137,12 @@ class ContactHelper:
         mobile_phone = wd.find_element_by_name("mobile").get_attribute("value")
         work_phone = wd.find_element_by_name("work").get_attribute("value")
         second_home = wd.find_element_by_name("phone2").get_attribute("value")
-        return Contact(first_name=first_name, lastname=lastname, middlename=middlename, id=id, home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home)
+        email = wd.find_element_by_name("email").get_attribute("value")
+        second_email = wd.find_element_by_name("email2").get_attribute("value")
+        third_email = wd.find_element_by_name("email3").get_attribute("value")
+        return Contact(first_name=first_name, lastname=lastname, middlename=middlename, id=id,
+                       home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, second_home=second_home,
+                       email=email, second_email=second_email, third_email=third_email)
 
 
     def get_contact_from_view_page(self, index):
