@@ -7,8 +7,7 @@ def test_del_contact(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(first_name="Vasia"))
     old_contacts = app.contact.get_contact_list()
-    index = randrange(len(old_contacts))
-    app.contact.delete_first_contact(index)
+    app.contact.delete_first_contact()
     app.open_home_page()
     assert len(old_contacts) - 1 == app.contact.count()
     new_contacts = app.contact.get_contact_list()
