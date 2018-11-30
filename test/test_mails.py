@@ -16,4 +16,3 @@ def merge_mails_like_on_home_page(contact):
                                 filter(lambda x: x is not None,
                                        [contact.email, contact.second_email, contact.third_email]))))
 
-    
