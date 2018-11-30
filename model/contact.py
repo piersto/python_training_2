@@ -37,10 +37,11 @@ class Contact:
         self.first_name_from_home_page = first_name_from_home_page
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.first_name, self.lastname)
+        return "%s:%s;%s;%s;%s" % (self.id, self.first_name, self.middlename, self.lastname, self.nickname)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name and self.lastname == other.lastname
+        return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name \
+                and self.lastname == other.lastname
 
     def id_or_max(self):
         if self.id:

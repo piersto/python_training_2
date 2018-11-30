@@ -118,9 +118,9 @@ class ContactHelper:
                 all_mails = cells[4].text
                 address = cells[3].text
                 self.contact_cache.append(Contact(lastname=lastname, first_name=first_name, id=id,
-                                                                all_phones_from_home_page=all_phones,
-                                                                    all_mails_from_home_page=all_mails,
-                                                  address=address))
+                                                                        all_phones_from_home_page=all_phones,
+                                                                        all_mails_from_home_page=all_mails,
+                                                                        address=address))
         return list(self.contact_cache)
 
     def open_contact_view_by_index(self, index):
