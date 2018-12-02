@@ -7,13 +7,14 @@ import string
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    symbols = string.ascii_letters \
+              #+ string.digits + string.punctuation + " "*10
     return prefix + "". join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 testdata = [Contact(first_name="", middlename="", lastname="", nickname="")] + [
     Contact(first_name=random_string("FirstName", 10), middlename=random_string("MiddleName", 20), lastname=random_string("LastName", 10), nickname=random_string("NickName", 8))
-    for i in range(5)
+    for i in range(1)
 ]
 
 
