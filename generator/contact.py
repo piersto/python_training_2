@@ -38,3 +38,4 @@ with open(file, 'w') as out:
     jsonpickle.set_encoder_options('json', indent=2)
     out.write(jsonpickle.encode(testdata))
 
+
