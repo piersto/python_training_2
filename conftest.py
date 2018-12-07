@@ -4,7 +4,7 @@ import os.path
 import importlib
 import jsonpickle
 from fixture.application import Application
-
+from fixture.db import DbFixture
 fixture = None
 target = None
 
@@ -22,6 +22,15 @@ def app(request):
         fixture = Application(browser=browser, base_url=target['baseUrl'])
     fixture.session.ensure_login(username=target["username"], password=target["password"])
     return fixture
+
+
+@pytest.fixture(scope="session")
+def db(request):
+    dbfixture = DbFixture()
+    def fin():
+        dbfixture.destroy()
+    request.addfinalizer(fin)
+    return dbfixture
 
 
 @pytest.fixture(scope="session", autouse=True)
