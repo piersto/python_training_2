@@ -18,7 +18,7 @@ class ORMFixture:
     class ORMContact(db.Entity):
         _table_ = 'addressbook'
         id = PrimaryKey(int, column='id')
-        firstname = Optional(str, column='firstname')
+        first_name = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
         deprecated = Optional(datetime, column='deprecated')
 
@@ -33,7 +33,17 @@ class ORMFixture:
         return list(map(convert, groups))
 
 
-
     @db_session
     def get_group_list(self):
         return self.convert_groups_to_model(select(g for g in ORMFixture.ORMGroup))
+
+
+    def convert_contacts_to_model(self, contacts):
+        def convert(contact):
+            return Contact(id=str(contact.id), first_name=contact.first_name, lastname=contact.lastname)
+        return list(map(convert, contacts))
+
+    @db_session
+    def get_contact_list(self):
+        return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None))
+
