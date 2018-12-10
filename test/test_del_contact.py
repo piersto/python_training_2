@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
-from random import randrange
+import random
+
 
 def test_del_contact(app):
     app.open_home_page()
@@ -14,16 +15,16 @@ def test_del_contact(app):
     old_contacts[0:1] = []
     assert old_contacts == new_contacts
 
-def test_del_some_contact(app):
+def test_del_some_contact(app, db):
     app.open_home_page()
-    if app.contact.count() == 0:
+    if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(first_name="Vasia"))
-    old_contacts = app.contact.get_contact_list()
-    index = randrange(len(old_contacts))
-    app.contact.delete_contact_by_index(index)
+    old_contacts = db.get_contact_list()
+    contact = random.choice(old_contacts)
+    app.contact.delete_contact_by_id(contact.id)
     app.open_home_page()
     assert len(old_contacts) - 1 == app.contact.count()
-    new_contacts = app.contact.get_contact_list()
-    old_contacts[index:index+1] = []
+    new_contacts = db.get_contact_list()
+    old_contacts.remove(contact)
     assert old_contacts == new_contacts
 
