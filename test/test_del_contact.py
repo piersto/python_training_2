@@ -27,3 +27,4 @@ def test_del_some_contact(app, db):
     old_contacts.remove(contact)
     assert old_contacts == new_contacts
 
+
