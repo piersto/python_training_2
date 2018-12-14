@@ -19,3 +19,4 @@ def test_add_contact_to_group(app, db, orm, check_ui):
     old_contacts.append(contact)
     new_contacts = orm.get_contacts_in_group()
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+
