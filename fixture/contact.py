@@ -79,7 +79,6 @@ class ContactHelper:
         wd = self.app.wd
         self.modify_contact_by_index(0)
 
-
     def open_add_contact_page(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Edit / add address book entry'])[1]/following::input[1]")) > 0):
@@ -88,7 +87,6 @@ class ContactHelper:
     def delete_first_contact(self):
         wd = self.app.wd
         self.delete_contact_by_index(0)
-
 
     def delete_contact_by_index(self, index):
         wd = self.app.wd
@@ -107,10 +105,15 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+    def add_contact_to_group_by_id(self, id):
+        wd = self.app.wd
+        self.select_contact_by_id(id)
+        wd.find_element_by_name('add').click()
+        self.contact_cache = None
+
     def select_contact_by_id(self, id):
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
-
 
     def count(self):
         wd = self.app.wd
