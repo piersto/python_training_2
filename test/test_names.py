@@ -19,8 +19,8 @@ def test_address_on_home_page(app):
     assert contact_from_home_page.address == contact_from_edit_page.address
 
 
-def test_contacs_on_home_page_vs_db(app, db):
+def test_contacts_on_home_page_vs_db(app, db):
     contact_from_home_page = app.contact.get_contact_list()
     contact_from_db = db.get_contact_list()
-    assert sorted(contact_from_home_page,  key=Contact.id_or_max) == sorted(contact_from_db, key=Contact.id_or_max)
+    assert sorted(contact_from_home_page, key=Contact.id_or_max) == sorted(contact_from_db, key=Contact.id_or_max)
 
