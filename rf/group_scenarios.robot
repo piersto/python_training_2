@@ -1,10 +1,9 @@
 *** Settings ***
-Library rf.AddressBook
-Suite Setup Init Fixtures
-Suite Teardown Destroy Fixtures
+Library  rf.AddressBook
+Suite Setup  Init Fixtures
+Suite Teardown  Destroy Fixtures
 
 
 *** Test Cases ***
 Add new group
-    Create Group  name1  header1  footer 1
-
+    Create Group  name1  header1  footer1
