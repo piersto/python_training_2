@@ -1,48 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.1 (Python 3.7.1 on win32)" generated="20190111 16:37:35.943" rpa="false">
-<suite id="s1" name="Group Scenarios" source="D:\python_training_2\rf\group_scenarios.robot">
-<kw name="Init Fixtures" type="setup">
-<msg timestamp="20190111 16:37:35.988" level="FAIL">No keyword with name 'Init Fixtures' found.</msg>
-<status status="FAIL" starttime="20190111 16:37:35.988" endtime="20190111 16:37:35.988"></status>
+<robot generator="Robot 3.1.1 (Python 3.7.1 on win32)" generated="20190114 11:57:04.393" rpa="false">
+<suite id="s1" name="Group Scenarios" source="C:\Users\PStoiko\PycharmProjects\python_training_2\rf\group_scenarios.robot">
+<kw name="Init Fixtures" library="rf.AddressBook" type="setup">
+<status status="PASS" starttime="20190114 11:57:04.597" endtime="20190114 11:57:13.572"></status>
 </kw>
 <test id="s1-t1" name="Add new group">
-<status status="FAIL" starttime="20190111 16:37:35.989" endtime="20190111 16:37:35.989" critical="yes">Parent suite setup failed:
-No keyword with name 'Init Fixtures' found.</status>
-</test>
-<kw name="Destroy Fixtures" type="teardown">
-<msg timestamp="20190111 16:37:35.993" level="FAIL">No keyword with name 'Destroy Fixtures' found.</msg>
-<status status="FAIL" starttime="20190111 16:37:35.993" endtime="20190111 16:37:35.993">No keyword with name 'Destroy Fixtures' found.</status>
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${old_list}</var>
+</assign>
+<msg timestamp="20190114 11:57:13.580" level="INFO">${old_list} = [187:New Name;New Header;Group footer, 189:New Name;New Header;Group footer, 191:New Name;New Header;Group footer, 194:New Name;New Header;Group footer, 198:New Name;New Header;Group footer, 208:New N...</msg>
+<status status="PASS" starttime="20190114 11:57:13.574" endtime="20190114 11:57:13.580"></status>
 </kw>
-<status status="FAIL" starttime="20190111 16:37:35.945" endtime="20190111 16:37:35.993">Suite setup failed:
-No keyword with name 'Init Fixtures' found.
-
-Also suite teardown failed:
-No keyword with name 'Destroy Fixtures' found.</status>
+<kw name="New Group" library="rf.AddressBook">
+<arguments>
+<arg>name1</arg>
+<arg>header1</arg>
+<arg>footer1</arg>
+</arguments>
+<assign>
+<var>${group}</var>
+</assign>
+<msg timestamp="20190114 11:57:13.584" level="INFO">${group} = None:name1;header1;footer1</msg>
+<status status="PASS" starttime="20190114 11:57:13.584" endtime="20190114 11:57:13.584"></status>
+</kw>
+<kw name="Create Group" library="rf.AddressBook">
+<arguments>
+<arg>${group}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:13.585" endtime="20190114 11:57:17.675"></status>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${new_list}</var>
+</assign>
+<msg timestamp="20190114 11:57:17.679" level="INFO">${new_list} = [187:New Name;New Header;Group footer, 189:New Name;New Header;Group footer, 191:New Name;New Header;Group footer, 194:New Name;New Header;Group footer, 198:New Name;New Header;Group footer, 208:New N...</msg>
+<status status="PASS" starttime="20190114 11:57:17.675" endtime="20190114 11:57:17.679"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${group}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:17.686" endtime="20190114 11:57:17.686"></status>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arguments>
+<arg>${new_list}</arg>
+<arg>${old_list}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:17.687" endtime="20190114 11:57:17.687"></status>
+</kw>
+<status status="PASS" starttime="20190114 11:57:13.572" endtime="20190114 11:57:17.688" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Delete group">
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${old_list}</var>
+</assign>
+<msg timestamp="20190114 11:57:17.692" level="INFO">${old_list} = [187:New Name;New Header;Group footer, 189:New Name;New Header;Group footer, 191:New Name;New Header;Group footer, 194:New Name;New Header;Group footer, 198:New Name;New Header;Group footer, 208:New N...</msg>
+<status status="PASS" starttime="20190114 11:57:17.690" endtime="20190114 11:57:17.692"></status>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${old_list}</arg>
+</arguments>
+<assign>
+<var>${len}</var>
+</assign>
+<msg timestamp="20190114 11:57:17.694" level="INFO">Length is 137</msg>
+<msg timestamp="20190114 11:57:17.694" level="INFO">${len} = 137</msg>
+<status status="PASS" starttime="20190114 11:57:17.694" endtime="20190114 11:57:17.694"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randrange(${len})</arg>
+<arg>random</arg>
+</arguments>
+<assign>
+<var>${index}</var>
+</assign>
+<msg timestamp="20190114 11:57:17.695" level="INFO">${index} = 79</msg>
+<status status="PASS" starttime="20190114 11:57:17.695" endtime="20190114 11:57:17.695"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${index}</arg>
+</arguments>
+<assign>
+<var>${group}</var>
+</assign>
+<msg timestamp="20190114 11:57:17.696" level="INFO">${group} = 337:nameeP;headerOREsOXkgmBRnA;footercUjoqeHYGJk</msg>
+<status status="PASS" starttime="20190114 11:57:17.696" endtime="20190114 11:57:17.696"></status>
+</kw>
+<kw name="Delete Group" library="rf.AddressBook">
+<arguments>
+<arg>${group}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:17.697" endtime="20190114 11:57:21.120"></status>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${new_list}</var>
+</assign>
+<msg timestamp="20190114 11:57:21.124" level="INFO">${new_list} = [187:New Name;New Header;Group footer, 189:New Name;New Header;Group footer, 191:New Name;New Header;Group footer, 194:New Name;New Header;Group footer, 198:New Name;New Header;Group footer, 208:New N...</msg>
+<status status="PASS" starttime="20190114 11:57:21.121" endtime="20190114 11:57:21.124"></status>
+</kw>
+<kw name="Remove Values From List" library="Collections">
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${group}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:21.124" endtime="20190114 11:57:21.125"></status>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arguments>
+<arg>${new_list}</arg>
+<arg>${old_list}</arg>
+</arguments>
+<status status="PASS" starttime="20190114 11:57:21.125" endtime="20190114 11:57:21.125"></status>
+</kw>
+<status status="PASS" starttime="20190114 11:57:17.689" endtime="20190114 11:57:21.126" critical="yes"></status>
+</test>
+<kw name="Destroy Fixtures" library="rf.AddressBook" type="teardown">
+<status status="PASS" starttime="20190114 11:57:21.128" endtime="20190114 11:57:23.235"></status>
+</kw>
+<status status="PASS" starttime="20190114 11:57:04.408" endtime="20190114 11:57:23.235"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1">Critical Tests</stat>
-<stat pass="0" fail="1">All Tests</stat>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" id="s1" name="Group Scenarios">Group Scenarios</stat>
+<stat pass="2" fail="0" id="s1" name="Group Scenarios">Group Scenarios</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20190111 16:37:35.985" level="ERROR">Error in file 'D:\python_training_2\rf\group_scenarios.robot': Importing test library 'rf.AddressBook' failed: ModuleNotFoundError: No module named 'rf'
-Traceback (most recent call last):
-  None
-PYTHONPATH:
-  D:\python_training_2\env\Scripts\robot.exe
-  d:\python_training_2\env\scripts\python37.zip
-  d:\python_training_2\env\DLLs
-  d:\python_training_2\env\lib
-  d:\python_training_2\env\scripts
-  c:\python37\Lib
-  c:\python37\DLLs
-  d:\python_training_2\env
-  d:\python_training_2\env\lib\site-packages</msg>
 </errors>
 </robot>
